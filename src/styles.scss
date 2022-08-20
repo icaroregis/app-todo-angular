@@ -1,1 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
+/* 
+  Você pode adicionar estilos globais a este arquivo e também importar outros arquivos de estilo 
+*/
+@import "./dist/scss/variables.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", "Courier New", Courier, monospace;
+  font-weight: 400;
+}
+
+body {
+  background: $primary-background-color;
+}
+
+ul {
+  list-style: none;
+}
+
+textarea:focus,
+input:focus,
+button {
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+//Classes
+.container {
+  width: 350px;
+  margin: 50px auto;
+}
