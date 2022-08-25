@@ -1,16 +1,20 @@
-<section [ngClass]="{'loading': !taskList.length}">
+<!-- explicando adição de classes no angular. Aqui no caso estou adicionado uma classe chamada loading... Caso a quantidade de itens seja igual a zero, ai no caso será aplicado uma imagem como background desta sessão. -->
+<section [ngClass]="{'loading': taskList.length === 0}">
+  <!-- ngIf => se a quantidade de itens for maior que zero renderiza as li's senão não renderiza as li's -->
   <ul *ngIf="taskList.length > 0">
     <li *ngFor="let item of taskList; let elementIndex = index">
       <input type="checkbox" [(ngModel)]="item.checked">
-      <input type="text" [(ngModel)]="item.task">
+      <!-- caso o item vier checado com o valor do checked como true então aplicará uma estilização na classe porque o checked será adicionado a tag -->
+      <input type="text" (keyup)="validationInput(item.task, elementIndex)" [(ngModel)]="item.task" [ngClass]="{'checked': item.checked}">
 
       <button (click)="deleteItemTaskList(elementIndex)">
-        <img src="assets/icons/icon-trash.svg" alt="">
+        <img src="assets/icons/icon-trash.svg" alt="Ícone de lixeira para deletar as tasks">
       </button>
     </li>
   </ul>
 </section>
 
-<app-todo-input-add-itens></app-todo-input-add-itens>
+<app-todo-input-add-itens (emitItemTaskList)="setEmitTaskList($event)">
+</app-todo-input-add-itens>
 <app-todo-button-delete-all *ngIf="taskList.length > 0" (click)="deleteAllTaskList()">
 </app-todo-button-delete-all>
